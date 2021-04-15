@@ -57,6 +57,12 @@ class ViewController: UIViewController {
     private lazy var subtractionButton = createButton(with: "-", titleColor: .white, backgroundColor: .systemOrange)
     private lazy var thirdStackView = createHorizontalStackView()
 
+    private lazy var oneButton = createButton(with: "1", titleColor: .white, backgroundColor: .darkGray)
+    private lazy var twoButton = createButton(with: "2", titleColor: .white, backgroundColor: .darkGray)
+    private lazy var threeButton = createButton(with: "3", titleColor: .white, backgroundColor: .darkGray)
+    private lazy var summButton = createButton(with: "+", titleColor: .white, backgroundColor: .systemOrange)
+    private lazy var fourthStackView = createHorizontalStackView()
+
     // MARK: - Lifecycle
 
     override func viewDidLoad() {
@@ -95,6 +101,13 @@ class ViewController: UIViewController {
         thirdStackView.addArrangedSubview(fiveButton)
         thirdStackView.addArrangedSubview(sixButton)
         thirdStackView.addArrangedSubview(subtractionButton)
+
+        buttonsStackView.addArrangedSubview(fourthStackView)
+
+        fourthStackView.addArrangedSubview(oneButton)
+        fourthStackView.addArrangedSubview(twoButton)
+        fourthStackView.addArrangedSubview(threeButton)
+        fourthStackView.addArrangedSubview(summButton)
     }
 
     private func setupLayout() {
