@@ -13,9 +13,10 @@ class ViewController: UIViewController {
         let label = UILabel()
 
         label.text = "0"
-        label.font = .systemFont(ofSize: 75)
+        label.font = .systemFont(ofSize: Metric.resultFontSize, weight: .light)
         label.textColor = .white
         label.textAlignment = .right
+
         return label
     }()
 
@@ -24,6 +25,7 @@ class ViewController: UIViewController {
 
         stackView.axis = .vertical
         stackView.spacing = Metric.parentStackViewSpacing
+
         return stackView
     }()
 
@@ -32,6 +34,8 @@ class ViewController: UIViewController {
 
         stackView.axis = .vertical
         stackView.spacing = Metric.buttonsStackViewSpacing
+        stackView.distribution = .fillEqually
+
         return stackView
     }()
 
@@ -40,6 +44,12 @@ class ViewController: UIViewController {
     private lazy var percentButton = createButton(with: "%", titleColor: .black, backgroundColor: .lightGray)
     private lazy var divisionButton = createButton(with: "/", titleColor: .white, backgroundColor: .systemOrange)
     private lazy var firstStackView = createHorizontalStackView()
+
+    private lazy var sevenButton = createButton(with: "7", titleColor: .white, backgroundColor: .darkGray)
+    private lazy var eightButton = createButton(with: "8", titleColor: .white, backgroundColor: .darkGray)
+    private lazy var nineButton = createButton(with: "9", titleColor: .white, backgroundColor: .darkGray)
+    private lazy var multiplyButton = createButton(with: "x", titleColor: .white, backgroundColor: .systemOrange)
+    private lazy var secondStackView = createHorizontalStackView()
 
     // MARK: - Lifecycle
 
@@ -65,14 +75,22 @@ class ViewController: UIViewController {
         firstStackView.addArrangedSubview(plusMinusButton)
         firstStackView.addArrangedSubview(percentButton)
         firstStackView.addArrangedSubview(divisionButton)
+
+        buttonsStackView.addArrangedSubview(secondStackView)
+
+        secondStackView.addArrangedSubview(sevenButton)
+        secondStackView.addArrangedSubview(eightButton)
+        secondStackView.addArrangedSubview(nineButton)
+        secondStackView.addArrangedSubview(multiplyButton)
     }
 
     private func setupLayout() {
         parentStackView.translatesAutoresizingMaskIntoConstraints = false
-        parentStackView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 18).isActive = true
-        parentStackView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -18).isActive = true
-        parentStackView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -50).isActive = true
+        parentStackView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: Metric.leftOffset).isActive = true
+        parentStackView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: Metric.rightOffset).isActive = true
+        parentStackView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: Metric.bottonOffset).isActive = true
 
+        firstStackView.heightAnchor.constraint(equalToConstant: Metric.buttonHeight).isActive = true
     }
 
     private func setupView() {
@@ -86,11 +104,13 @@ class ViewController: UIViewController {
 
         button.setTitle(title, for: .normal)
         button.setTitleColor(titleColor, for: .normal)
-        button.titleLabel?.font = .systemFont(ofSize: 30, weight: .medium)
+        button.titleLabel?.font = .systemFont(ofSize: Metric.buttonFontSize, weight: .medium)
         button.backgroundColor = backgroundColor
 
         button.layer.masksToBounds = true
         button.layer.cornerRadius = Metric.buttonHeight / 2
+
+        button.widthAnchor.constraint(equalTo: button.heightAnchor, multiplier: 1).isActive = true
 
         return button
     }
@@ -116,5 +136,11 @@ extension ViewController {
         static let parentStackViewSpacing: CGFloat = 30
         static let buttonsStackViewSpacing: CGFloat = 15
 
+        static let resultFontSize: CGFloat = 70
+        static let buttonFontSize: CGFloat = 70
+
+        static let leftOffset: CGFloat = 18
+        static let rightOffset: CGFloat = -18
+        static let bottonOffset: CGFloat = -50
     }
 }
