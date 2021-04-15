@@ -39,6 +39,7 @@ class ViewController: UIViewController {
         return stackView
     }()
 
+
     private lazy var clearButton = createButton(with: "AC", titleColor: .black, backgroundColor: .lightGray)
     private lazy var plusMinusButton = createButton(with: "+/-", titleColor: .black, backgroundColor: .lightGray)
     private lazy var percentButton = createButton(with: "%", titleColor: .black, backgroundColor: .lightGray)
@@ -63,6 +64,12 @@ class ViewController: UIViewController {
     private lazy var summButton = createButton(with: "+", titleColor: .white, backgroundColor: .systemOrange)
     private lazy var fourthStackView = createHorizontalStackView()
 
+    private lazy var zeroButton = createButton(with: "0", titleColor: .white, backgroundColor: .darkGray)
+    private lazy var commaButton = createButton(with: ",", titleColor: .white, backgroundColor: .darkGray)
+    private lazy var equalityButton = createButton(with: "=", titleColor: .white, backgroundColor: .systemOrange)
+    private lazy var fiveStackView = createHorizontalStackView()
+
+
     // MARK: - Lifecycle
 
     override func viewDidLoad() {
@@ -80,6 +87,7 @@ class ViewController: UIViewController {
 
         parentStackView.addArrangedSubview(resultLabel)
         parentStackView.addArrangedSubview(buttonsStackView)
+
 
         buttonsStackView.addArrangedSubview(firstStackView)
 
@@ -108,6 +116,12 @@ class ViewController: UIViewController {
         fourthStackView.addArrangedSubview(twoButton)
         fourthStackView.addArrangedSubview(threeButton)
         fourthStackView.addArrangedSubview(summButton)
+
+        buttonsStackView.addArrangedSubview(fiveStackView)
+
+        fiveStackView.addArrangedSubview(zeroButton)
+        fiveStackView.addArrangedSubview(commaButton)
+        fiveStackView.addArrangedSubview(equalityButton)
     }
 
     private func setupLayout() {
@@ -117,7 +131,7 @@ class ViewController: UIViewController {
         parentStackView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: Metric.bottonOffset).isActive = true
 
         firstStackView.heightAnchor.constraint(equalToConstant: Metric.buttonHeight).isActive = true
-    }
+   }
 
     private func setupView() {
         view.backgroundColor = .black
@@ -158,6 +172,7 @@ extension ViewController {
 
     enum Metric {
         static let buttonHeight: CGFloat = 75
+        static let buttonHeight2: CGFloat = 165
 
         static let parentStackViewSpacing: CGFloat = 30
         static let buttonsStackViewSpacing: CGFloat = 15
