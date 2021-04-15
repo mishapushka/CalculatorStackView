@@ -51,6 +51,12 @@ class ViewController: UIViewController {
     private lazy var multiplyButton = createButton(with: "x", titleColor: .white, backgroundColor: .systemOrange)
     private lazy var secondStackView = createHorizontalStackView()
 
+    private lazy var fourButton = createButton(with: "4", titleColor: .white, backgroundColor: .darkGray)
+    private lazy var fiveButton = createButton(with: "5", titleColor: .white, backgroundColor: .darkGray)
+    private lazy var sixButton = createButton(with: "6", titleColor: .white, backgroundColor: .darkGray)
+    private lazy var subtractionButton = createButton(with: "-", titleColor: .white, backgroundColor: .systemOrange)
+    private lazy var thirdStackView = createHorizontalStackView()
+
     // MARK: - Lifecycle
 
     override func viewDidLoad() {
@@ -82,6 +88,13 @@ class ViewController: UIViewController {
         secondStackView.addArrangedSubview(eightButton)
         secondStackView.addArrangedSubview(nineButton)
         secondStackView.addArrangedSubview(multiplyButton)
+
+        buttonsStackView.addArrangedSubview(thirdStackView)
+
+        thirdStackView.addArrangedSubview(fourButton)
+        thirdStackView.addArrangedSubview(fiveButton)
+        thirdStackView.addArrangedSubview(sixButton)
+        thirdStackView.addArrangedSubview(subtractionButton)
     }
 
     private func setupLayout() {
@@ -137,7 +150,7 @@ extension ViewController {
         static let buttonsStackViewSpacing: CGFloat = 15
 
         static let resultFontSize: CGFloat = 70
-        static let buttonFontSize: CGFloat = 70
+        static let buttonFontSize: CGFloat = 30
 
         static let leftOffset: CGFloat = 18
         static let rightOffset: CGFloat = -18
