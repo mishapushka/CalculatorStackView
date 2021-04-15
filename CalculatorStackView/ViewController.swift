@@ -19,6 +19,22 @@ class ViewController: UIViewController {
         return label
     }()
 
+    private lazy var parentStackView: UIStackView = {
+        let stackView = UIStackView()
+
+        stackView.axis = .vertical
+        stackView.spacing = Metric.parentStackViewSpacing
+        return stackView
+    }()
+
+    private lazy var buttonsStackView: UIStackView = {
+        let stackView = UIStackView()
+
+        stackView.axis = .vertical
+        stackView.spacing = Metric.buttonsStackViewSpacing
+        return stackView
+    }()
+
     // MARK: - Lifecycle
 
     override func viewDidLoad() {
@@ -32,10 +48,17 @@ class ViewController: UIViewController {
     // MARK: - Settings
 
     private func setupHierarchy() {
+        view.addSubview(parentStackView)
 
+        parentStackView.addArrangedSubview(resultLabel)
+        parentStackView.addArrangedSubview(buttonsStackView)
     }
 
     private func setupLayout() {
+        parentStackView.translatesAutoresizingMaskIntoConstraints = false
+        parentStackView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 18).isActive = true
+        parentStackView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -18).isActive = true
+        parentStackView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -50).isActive = true
 
     }
 
@@ -52,6 +75,7 @@ class ViewController: UIViewController {
         }
     }
 
+
 }
 
 // MARK: - Constants
@@ -60,5 +84,9 @@ extension ViewController {
 
     enum Metric {
         static let buttonHeight: CGFloat = 75
+
+        static let parentStackViewSpacing: CGFloat = 30
+        static let buttonsStackViewSpacing: CGFloat = 15
+
     }
 }
