@@ -35,6 +35,12 @@ class ViewController: UIViewController {
         return stackView
     }()
 
+    private lazy var clearButton = createButton(with: "AC", titleColor: .black, backgroundColor: .lightGray)
+    private lazy var plusMinusButton = createButton(with: "+/-", titleColor: .black, backgroundColor: .lightGray)
+    private lazy var percentButton = createButton(with: "%", titleColor: .black, backgroundColor: .lightGray)
+    private lazy var divisionButton = createButton(with: "/", titleColor: .white, backgroundColor: .systemOrange)
+    private lazy var firstStackView = createHorizontalStackView()
+
     // MARK: - Lifecycle
 
     override func viewDidLoad() {
@@ -52,6 +58,13 @@ class ViewController: UIViewController {
 
         parentStackView.addArrangedSubview(resultLabel)
         parentStackView.addArrangedSubview(buttonsStackView)
+
+        buttonsStackView.addArrangedSubview(firstStackView)
+
+        firstStackView.addArrangedSubview(clearButton)
+        firstStackView.addArrangedSubview(plusMinusButton)
+        firstStackView.addArrangedSubview(percentButton)
+        firstStackView.addArrangedSubview(divisionButton)
     }
 
     private func setupLayout() {
@@ -82,7 +95,14 @@ class ViewController: UIViewController {
         return button
     }
 
-    
+    private func createHorizontalStackView() -> UIStackView {
+        let stackView = UIStackView()
+
+        stackView.axis = .horizontal
+        stackView.distribution = .equalSpacing
+
+        return stackView
+    }
 
 }
 
