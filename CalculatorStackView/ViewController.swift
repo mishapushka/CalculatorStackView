@@ -13,7 +13,7 @@ class ViewController: UIViewController {
         let label = UILabel()
 
         label.text = "0"
-        label.font = .systemFont(ofSize: 75, weight: .regular)
+        label.font = .systemFont(ofSize: 75)
         label.textColor = .white
         label.textAlignment = .right
         return label
@@ -68,13 +68,21 @@ class ViewController: UIViewController {
 
     //MARK: - Private functions
 
-    private func addCornerRadius(for buttons: [UIButton]) {
-        buttons.forEach {
-            $0.layer.masksToBounds = true
-            $0.layer.cornerRadius = Metric.buttonHeight / 2
-        }
+    private func createButton(with title: String, titleColor: UIColor, backgroundColor: UIColor) -> UIButton {
+        let button = UIButton(type: .system)
+
+        button.setTitle(title, for: .normal)
+        button.setTitleColor(titleColor, for: .normal)
+        button.titleLabel?.font = .systemFont(ofSize: 30, weight: .medium)
+        button.backgroundColor = backgroundColor
+
+        button.layer.masksToBounds = true
+        button.layer.cornerRadius = Metric.buttonHeight / 2
+
+        return button
     }
 
+    
 
 }
 
