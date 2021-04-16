@@ -131,6 +131,12 @@ class ViewController: UIViewController {
         parentStackView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: Metric.bottonOffset).isActive = true
 
         firstStackView.heightAnchor.constraint(equalToConstant: Metric.buttonHeight).isActive = true
+
+        zeroButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: Metric.leftOffset).isActive = true
+        zeroButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: Metric.zeroButtonTreiling).isActive = true
+        zeroButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: Metric.bottonOffset).isActive = true
+        zeroButton.heightAnchor.constraint(equalToConstant: Metric.zeroButtonRatio / Metric.zeroButtonRatio).isActive = true
+
    }
 
     private func setupView() {
@@ -172,7 +178,6 @@ extension ViewController {
 
     enum Metric {
         static let buttonHeight: CGFloat = 75
-        static let buttonHeight2: CGFloat = 165
 
         static let parentStackViewSpacing: CGFloat = 30
         static let buttonsStackViewSpacing: CGFloat = 15
@@ -183,5 +188,8 @@ extension ViewController {
         static let leftOffset: CGFloat = 18
         static let rightOffset: CGFloat = -18
         static let bottonOffset: CGFloat = -50
+
+        static let zeroButtonTreiling: CGFloat = -217
+        static let zeroButtonRatio: CGFloat = 1.0
     }
 }
