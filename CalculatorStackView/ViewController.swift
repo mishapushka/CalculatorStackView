@@ -9,11 +9,187 @@ import UIKit
 
 class ViewController: UIViewController {
 
+    private lazy var resultLabel: UILabel = {
+        let label = UILabel()
+
+        label.text = "0"
+        label.font = .systemFont(ofSize: Metric.resultFontSize, weight: .light)
+        label.textColor = .white
+        label.textAlignment = .right
+
+        return label
+    }()
+
+    private lazy var parentStackView: UIStackView = {
+        let stackView = UIStackView()
+
+        stackView.axis = .vertical
+        stackView.spacing = Metric.parentStackViewSpacing
+
+        return stackView
+    }()
+
+    private lazy var buttonsStackView: UIStackView = {
+        let stackView = UIStackView()
+
+        stackView.axis = .vertical
+        stackView.spacing = Metric.buttonsStackViewSpacing
+        stackView.distribution = .fillEqually
+
+        return stackView
+    }()
+
+
+    private lazy var clearButton = createButton(with: "AC", titleColor: .black, backgroundColor: .lightGray)
+    private lazy var plusMinusButton = createButton(with: "+/-", titleColor: .black, backgroundColor: .lightGray)
+    private lazy var percentButton = createButton(with: "%", titleColor: .black, backgroundColor: .lightGray)
+    private lazy var divisionButton = createButton(with: "/", titleColor: .white, backgroundColor: .systemOrange)
+    private lazy var firstStackView = createHorizontalStackView()
+
+    private lazy var sevenButton = createButton(with: "7", titleColor: .white, backgroundColor: .darkGray)
+    private lazy var eightButton = createButton(with: "8", titleColor: .white, backgroundColor: .darkGray)
+    private lazy var nineButton = createButton(with: "9", titleColor: .white, backgroundColor: .darkGray)
+    private lazy var multiplyButton = createButton(with: "x", titleColor: .white, backgroundColor: .systemOrange)
+    private lazy var secondStackView = createHorizontalStackView()
+
+    private lazy var fourButton = createButton(with: "4", titleColor: .white, backgroundColor: .darkGray)
+    private lazy var fiveButton = createButton(with: "5", titleColor: .white, backgroundColor: .darkGray)
+    private lazy var sixButton = createButton(with: "6", titleColor: .white, backgroundColor: .darkGray)
+    private lazy var subtractionButton = createButton(with: "-", titleColor: .white, backgroundColor: .systemOrange)
+    private lazy var thirdStackView = createHorizontalStackView()
+
+    private lazy var oneButton = createButton(with: "1", titleColor: .white, backgroundColor: .darkGray)
+    private lazy var twoButton = createButton(with: "2", titleColor: .white, backgroundColor: .darkGray)
+    private lazy var threeButton = createButton(with: "3", titleColor: .white, backgroundColor: .darkGray)
+    private lazy var summButton = createButton(with: "+", titleColor: .white, backgroundColor: .systemOrange)
+    private lazy var fourthStackView = createHorizontalStackView()
+
+    private lazy var zeroButton = createButton(with: "0", titleColor: .white, backgroundColor: .darkGray)
+    private lazy var commaButton = createButton(with: ",", titleColor: .white, backgroundColor: .darkGray)
+    private lazy var equalityButton = createButton(with: "=", titleColor: .white, backgroundColor: .systemOrange)
+    private lazy var fiveStackView = createHorizontalStackView()
+
+
+    // MARK: - Lifecycle
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+
+        setupHierarchy()
+        setupLayout()
+        setupView()
     }
 
+    // MARK: - Settings
+
+    private func setupHierarchy() {
+        view.addSubview(parentStackView)
+
+        parentStackView.addArrangedSubview(resultLabel)
+        parentStackView.addArrangedSubview(buttonsStackView)
+
+
+        buttonsStackView.addArrangedSubview(firstStackView)
+
+        firstStackView.addArrangedSubview(clearButton)
+        firstStackView.addArrangedSubview(plusMinusButton)
+        firstStackView.addArrangedSubview(percentButton)
+        firstStackView.addArrangedSubview(divisionButton)
+
+        buttonsStackView.addArrangedSubview(secondStackView)
+
+        secondStackView.addArrangedSubview(sevenButton)
+        secondStackView.addArrangedSubview(eightButton)
+        secondStackView.addArrangedSubview(nineButton)
+        secondStackView.addArrangedSubview(multiplyButton)
+
+        buttonsStackView.addArrangedSubview(thirdStackView)
+
+        thirdStackView.addArrangedSubview(fourButton)
+        thirdStackView.addArrangedSubview(fiveButton)
+        thirdStackView.addArrangedSubview(sixButton)
+        thirdStackView.addArrangedSubview(subtractionButton)
+
+        buttonsStackView.addArrangedSubview(fourthStackView)
+
+        fourthStackView.addArrangedSubview(oneButton)
+        fourthStackView.addArrangedSubview(twoButton)
+        fourthStackView.addArrangedSubview(threeButton)
+        fourthStackView.addArrangedSubview(summButton)
+
+        buttonsStackView.addArrangedSubview(fiveStackView)
+
+        fiveStackView.addArrangedSubview(zeroButton)
+        fiveStackView.addArrangedSubview(commaButton)
+        fiveStackView.addArrangedSubview(equalityButton)
+    }
+
+    private func setupLayout() {
+        parentStackView.translatesAutoresizingMaskIntoConstraints = false
+        parentStackView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: Metric.leftOffset).isActive = true
+        parentStackView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: Metric.rightOffset).isActive = true
+        parentStackView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: Metric.bottonOffset).isActive = true
+
+        firstStackView.heightAnchor.constraint(equalToConstant: Metric.buttonHeight).isActive = true
+
+        zeroButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: Metric.leftOffset).isActive = true
+        zeroButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: Metric.zeroButtonTreiling).isActive = true
+        zeroButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: Metric.bottonOffset).isActive = true
+        zeroButton.heightAnchor.constraint(equalToConstant: Metric.zeroButtonRatio / Metric.zeroButtonRatio).isActive = true
+
+   }
+
+    private func setupView() {
+        view.backgroundColor = .black
+    }
+
+    //MARK: - Private functions
+
+    private func createButton(with title: String, titleColor: UIColor, backgroundColor: UIColor) -> UIButton {
+        let button = UIButton(type: .system)
+
+        button.setTitle(title, for: .normal)
+        button.setTitleColor(titleColor, for: .normal)
+        button.titleLabel?.font = .systemFont(ofSize: Metric.buttonFontSize, weight: .medium)
+        button.backgroundColor = backgroundColor
+
+        button.layer.masksToBounds = true
+        button.layer.cornerRadius = Metric.buttonHeight / 2
+
+        button.widthAnchor.constraint(equalTo: button.heightAnchor, multiplier: 1).isActive = true
+
+        return button
+    }
+
+    private func createHorizontalStackView() -> UIStackView {
+        let stackView = UIStackView()
+
+        stackView.axis = .horizontal
+        stackView.distribution = .equalSpacing
+
+        return stackView
+    }
 
 }
 
+// MARK: - Constants
+
+extension ViewController {
+
+    enum Metric {
+        static let buttonHeight: CGFloat = 75
+
+        static let parentStackViewSpacing: CGFloat = 30
+        static let buttonsStackViewSpacing: CGFloat = 15
+
+        static let resultFontSize: CGFloat = 70
+        static let buttonFontSize: CGFloat = 30
+
+        static let leftOffset: CGFloat = 18
+        static let rightOffset: CGFloat = -18
+        static let bottonOffset: CGFloat = -50
+
+        static let zeroButtonTreiling: CGFloat = -217
+        static let zeroButtonRatio: CGFloat = 1.0
+    }
+}
